@@ -1,0 +1,5 @@
+pfring:
+  tools:
+    install_type: package
+    repo_baseurl: http://packages.ntop.org/centos-stable/
+    repo_gpgkey: http://packages.ntop.org/centos-stable/RPM-GPG-KEY-deri

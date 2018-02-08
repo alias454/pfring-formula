@@ -1,0 +1,41 @@
+# Set default pfring settings
+{% set default_config = salt.grains.filter_by({
+  'default':
+  {
+    'pfring':
+    {
+      'install_type': 'package',
+      'repo_baseurl': 'http://packages.ntop.org/centos-stable/',
+      'repo_gpgkey': 'http://packages.ntop.org/centos-stable/RPM-GPG-KEY-deri',
+      'interfaces':
+      {
+        'management': 'eth0',
+        'capture': 
+        {
+          'device_names': 'eth1',
+          'enable_tx': '0',
+          'min_num_slots': '4096',
+        },
+      },
+    },
+  },
+  'host00':
+  {		
+    'pfring':
+    {
+      'interfaces':
+      {
+        'management': 'eth0',
+        'capture': 
+        {
+          'device_names': 'eth1',
+          'enable_tx': '0',
+          'min_num_slots': '32768',
+        },
+      },
+    },
+  },
+}, grain='host', base='default') %}
+
+# Merge the default settings with pillar data
+{% set host_lookup = salt['pillar.get']('pfring:lookup', default=default_config, merge=True) %}
