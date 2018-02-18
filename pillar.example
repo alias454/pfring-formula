@@ -1,5 +1,14 @@
 pfring:
-  tools:
-    install_type: package
-    repo_baseurl: http://packages.ntop.org/centos-stable/
-    repo_gpgkey: http://packages.ntop.org/centos-stable/RPM-GPG-KEY-deri
+  lookup:
+    pfring:
+      install_type: package
+      repo_baseurl: http://packages.ntop.org/centos-stable/
+      repo_gpgkey: http://packages.ntop.org/centos-stable/RPM-GPG-KEY-deri
+      base_dir: '/etc/pf_ring'               # /etc/pf_ring is default for package install
+      interfaces:
+        ip_binary_path: '/sbin/ip'           # path to ip binary for managing 
+        management: 'ens192'                 # Management interface name
+        capture: 
+          device_names: 'ens224'             # Capture interface name (currently only supports 1 interface)
+          enable_tx: '0'                     # Enable tx send on this interface (default is 0)
+          min_num_slots: '4096'              # Min Slots check support on card using ethtool -g eth1

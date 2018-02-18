@@ -3,7 +3,7 @@
 # Configure MANAGEMENT_INTERFACES settings for pfring
 pfring_managment_interface:
   file.replace:
-    - name: /etc/pf_ring/interfaces.conf
+    - name: {{ config.pfring.base_dir }}/interfaces.conf
     - pattern: |
         .?MANAGEMENT_INTERFACES="[a-zA-z0-9]+"
     - repl: |
@@ -12,7 +12,7 @@ pfring_managment_interface:
 # Configure CAPTURE_INTERFACES settings for pfring
 pfring_capture_interface:
   file.replace:
-    - name: /etc/pf_ring/interfaces.conf
+    - name: {{ config.pfring.base_dir }}/interfaces.conf
     - pattern: |
         .?CAPTURE_INTERFACES="[a-zA-z0-9 ]+"
     - repl: |
@@ -35,11 +35,9 @@ network_configure_{{ config.pfring.interfaces.capture.device_names }}:
     - retain_settings: True
     - type: eth
     - proto: none
-    - promisc: yes
     - autoneg: on
-    - speed: 1000
     - duplex: full
-    - rx: on
+    - rx: off
     - tx: off
     - sg: off
     - tso: off
@@ -62,8 +60,8 @@ network_configure_{{ config.pfring.interfaces.capture.device_names }}:
 
         [Service]
         Type=oneshot
-        ExecStart=/sbin/ip link set %i promisc on
-        ExecStop=/sbin/ip link set %i promisc off
+        ExecStart={{ config.pfring.interfaces.ip_binary_path }} link set %i promisc on
+        ExecStop={{ config.pfring.interfaces.ip_binary_path }} link set %i promisc off
         RemainAfterExit=yes
 
         [Install]
