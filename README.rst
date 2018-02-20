@@ -2,7 +2,7 @@
 pfring-formula
 ================
 
-A saltstack formula to install pf_ring on RHEL based systems.
+A saltstack formula to install pf_ring on RHEL or Debian based systems.
 
 .. note::
 
@@ -17,7 +17,7 @@ Available states
 
 ``pfring-repo``
 ------------
-Manage repo files on RHEL/CentOS 7 systems.
+Manage repo files on RHEL/CentOS 7 or Debian systems.
 
 ``pfring-prereqs``
 ------------
@@ -33,4 +33,4 @@ Manage configuration file placement
 
 ``pfring-service``
 ------------
-Manage pfring service and a service to manage promiscuous mode of defined network interfaces on RHEL/CentOS 7 systems.
+Manage pfring service and a service to manage promiscuous mode of defined network interfaces on RHEL/CentOS 7 or Debian systems.

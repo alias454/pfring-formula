@@ -9,10 +9,10 @@ pf_ring_repo:
     - name: pfring
     - comments: |
         # Managed by Salt Do not edit
-        # pf-ring repository 
-    - baseurl: {{ config.pfring.repo_baseurl }}$releasever/$basearch/
+        # pf-ring repository
+    - baseurl: {{ config.package.repo_baseurl }}$releasever/$basearch/
     - gpgcheck: 1
-    - gpgkey: {{ config.pfring.repo_gpgkey }}
+    - gpgkey: {{ config.package.repo_gpgkey }}
     - enabled: 1
 
 pf_ring_repo_noarch:
@@ -20,10 +20,30 @@ pf_ring_repo_noarch:
     - name: pfring_noarch
     - comments: |
         # Managed by Salt Do not edit
-        # pf-ring repository 
-    - baseurl: {{ config.pfring.repo_baseurl }}$releasever/noarch/
+        # pf-ring repository
+    - baseurl: {{ config.package.repo_baseurl }}$releasever/noarch/
     - gpgcheck: 1
-    - gpgkey: {{ config.pfring.repo_gpgkey }}
+    - gpgkey: {{ config.package.repo_gpgkey }}
+    - enabled: 1
+
+# Configure repo file for Debian based systems
+{% elif salt.grains.get('os_family') == 'Debian' %}
+pf_ring_repo:
+  pkgrepo.managed:
+    - name: {{ config.package.repo_baseurl }} x64/
+    - file: /etc/apt/sources.list.d/pfring-stable.list
+    - comments: |
+        # Managed by Salt Do not edit
+        # pf-ring repository
+    - enabled: 1
+
+pf_ring_repo_noarch:
+  pkgrepo.managed:
+    - name: {{ config.package.repo_baseurl }} all/
+    - file: /etc/apt/sources.list.d/pfring-extra-stable.list
+    - comments: |
+        # Managed by Salt Do not edit
+        # pf-ring repository
     - enabled: 1
 
 {% endif %}
