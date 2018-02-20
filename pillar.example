@@ -2,10 +2,10 @@
 pfring:
   lookup:
     package:
-    {% if grains['os'] == 'RedHat' %}
+    {% if grains['os_family'] == 'RedHat' %}
       repo_baseurl: http://packages.ntop.org/centos-stable/
       repo_gpgkey: http://packages.ntop.org/centos-stable/RPM-GPG-KEY-deri
-    {% elif grains['os'] == 'Debian' %}
+    {% elif grains['os_family'] == 'Debian' %}
       repo_baseurl: deb http://packages.ntop.org/apt-stable/stretch/
       repo_gpgkey:
     {% endif %}
