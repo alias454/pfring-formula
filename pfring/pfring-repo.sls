@@ -28,6 +28,12 @@ pf_ring_repo_noarch:
 
 # Configure repo file for Debian based systems
 {% elif salt.grains.get('os_family') == 'Debian' %}
+# Import keys for pfring
+command-apt-key-pfring:
+  cmd.run:
+    - name: apt-key adv --fetch-keys {{ config.package.repo_gpgkey }}
+    - unless: apt-key list |grep ntop.org
+
 pf_ring_repo:
   pkgrepo.managed:
     - name: {{ config.package.repo_baseurl }} x64/

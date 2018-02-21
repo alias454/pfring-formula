@@ -46,6 +46,7 @@
   {
     'package':
     {
+      'skip_verify': '0',
       'repo_baseurl': 'http://packages.ntop.org/centos-stable/',
       'repo_gpgkey': 'http://packages.ntop.org/centos-stable/RPM-GPG-KEY-deri',
     }
@@ -54,8 +55,9 @@
   {
     'package':
     {
+      'skip_verify': '0',
       'repo_baseurl': 'deb http://packages.ntop.org/apt-stable/stretch/',
-      'repo_gpgkey': '',
+      'repo_gpgkey': 'http://packages.ntop.org/apt-stable/ntop.key',
     }
   }
 } %}

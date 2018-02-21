@@ -8,5 +8,6 @@ package-install-pfring:
       - pfring
       - pfring-dkms
     - refresh: True
+    - skip_verify: {{ config.package.skip_verify }}
 
 {% endif %}

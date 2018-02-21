@@ -3,14 +3,16 @@ pfring:
   lookup:
     package:
     {% if grains['os_family'] == 'RedHat' %}
-      repo_baseurl: http://packages.ntop.org/centos-stable/
-      repo_gpgkey: http://packages.ntop.org/centos-stable/RPM-GPG-KEY-deri
+      repo_baseurl: 'http://packages.ntop.org/centos-stable/'
+      repo_gpgkey: 'http://packages.ntop.org/centos-stable/RPM-GPG-KEY-deri'
+      skip_verify: '0'
     {% elif grains['os_family'] == 'Debian' %}
-      repo_baseurl: deb http://packages.ntop.org/apt-stable/stretch/
-      repo_gpgkey:
+      repo_baseurl: 'deb http://packages.ntop.org/apt-stable/stretch/'
+      repo_gpgkey: 'http://packages.ntop.org/apt-stable/ntop.key'
+      skip_verify: '0'
     {% endif %}
     pfring:
-      install_type: package
+      install_type: 'package'
       base_dir: '/etc/pf_ring'               # /etc/pf_ring is default for package install
       interfaces:
         ip_binary_path: '/sbin/ip'           # path to ip binary for managing 
